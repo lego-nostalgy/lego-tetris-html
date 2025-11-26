@@ -10,6 +10,7 @@ LEGO Minifigure Pac-Man Game | Classic Arcade Remake in LEGO Style | HTML5 JavaS
 
 Почему выбирают наш проект?
 
+
 Для игроков
 
 Ностальгия по классике с современной графикой,
@@ -19,6 +20,7 @@ LEGO Minifigure Pac-Man Game | Classic Arcade Remake in LEGO Style | HTML5 JavaS
 Поддержка всех устройств,
 
 Регулярные обновления и улучшения,
+
 
 Для разработчиков
 
