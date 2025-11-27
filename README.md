@@ -2,8 +2,8 @@
 
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/HTML)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/JavaScript)
-[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/CSS)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/lego-tetris-game?style=social)](https://github.com/yourusername/lego-tetris-game/stargazers)
+
+
 
 ## 🎮 **LEGO Tetris Game - Классический Тетрис в Стиле LEGO**
 
@@ -16,12 +16,6 @@
 - **Реалистичная физика** падения LEGO-фигур
 - **Система вращения** элементов конструктора
 - **Авторские алгоритмы** генерации фигур
-
-#### 🎯 **Уникальная LEGO-механика**
-- **Сборка и разборка** LEGO-конструкций
-- **Динамическая модификация** фигур во время игры
-- **Реалистичные кирпичики** с физическими свойствами
-- **Система комбо-сборки** сложных механизмов
 
 #### 📚 **Образовательный потенциал**
 - **Развитие логического** и пространственного мышления
