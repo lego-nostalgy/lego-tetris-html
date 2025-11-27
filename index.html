@@ -1,74 +1,89 @@
-import pygame
-import random
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGO Pac-Man Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            margin: 0;
+        }
+        canvas {
+            border: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
 
-# Инициализация Pygame
-pygame.init()
+        const pacman = {
+            x: 50,
+            y: 50,
+            size: 30,
+            speed: 5,
+            draw() {
+                ctx.fillStyle = 'yellow';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0.2 * Math.PI, 1.8 * Math.PI); // Создаем "рот"
+                ctx.lineTo(this.x, this.y);
+                ctx.fill();
+            },
+            move(dx, dy) {
+                this.x += dx * this.speed;
+                this.y += dy * this.speed;
 
-# Настройки экрана
-WIDTH, HEIGHT = 600, 400
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("LEGO Minifigure Pac-Man Game")
+                // Ограничение движения в пределах канваса
+                if (this.x < this.size) this.x = this.size;
+                if (this.x > canvas.width - this.size) this.x = canvas.width - this.size;
+                if (this.y < this.size) this.y = this.size;
+                if (this.y > canvas.height - this.size) this.y = canvas.height - this.size;
+            }
+        };
 
-# Цвета
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-GRAY = (200, 200, 200)
+        function drawMaze() {
+            ctx.fillStyle = 'gray';
+            for (let x = 0; x < canvas.width; x += 40) {
+                for (let y = 0; y < canvas.height; y += 40) {
+                    if ((x / 40 + y / 40) % 2 === 0) {
+                        ctx.fillRect(x, y, 40, 40);
+                    }
+                }
+            }
+        }
 
-# Игрок (Pac-Man)
-class LegoPacMan:
-    def __init__(self):
-        self.image = pygame.image.load('lego_pacman.png')  # Замените на путь к вашему спрайту Pac-Man
-        self.rect = self.image.get_rect(topleft=(50, 50))
-        self.speed = 5
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMaze();
+            pacman.draw();
+            requestAnimationFrame(gameLoop);
+        }
 
-    def move(self, dx, dy):
-        self.rect.x += dx * self.speed
-        self.rect.y += dy * self.speed
+        window.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowUp':
+                    pacman.move(0, -1);
+                    break;
+                case 'ArrowDown':
+                    pacman.move(0, 1);
+                    break;
+                case 'ArrowLeft':
+                    pacman.move(-1, 0);
+                    break;
+                case 'ArrowRight':
+                    pacman.move(1, 0);
+                    break;
+            }
+        });
 
-    def draw(self):
-        screen.blit(self.image, self.rect)
-
-# Отрисовка лабиринта
-def draw_maze():
-    for x in range(0, WIDTH, 40):  
-        for y in range(0, HEIGHT, 40):
-            if (x // 40 + y // 40) % 2 == 0:
-                pygame.draw.rect(screen, GRAY, (x, y, 40, 40))
-
-# Основной игровой цикл
-def main():
-    clock = pygame.time.Clock()
-    pacman = LegoPacMan()
-    running = True
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        keys = pygame.key.get_pressed()
-        dx = keys[pygame.K_RIGHT] - keys[pygame.K_LEFT]
-        dy = keys[pygame.K_DOWN] - keys[pygame.K_UP]
-        
-        # Обработка границ экрана
-        pacman.move(dx, dy)
-        if pacman.rect.x < 0:
-            pacman.rect.x = 0
-        if pacman.rect.x > WIDTH - pacman.rect.width:
-            pacman.rect.x = WIDTH - pacman.rect.width
-        if pacman.rect.y < 0:
-            pacman.rect.y = 0
-        if pacman.rect.y > HEIGHT - pacman.rect.height:
-            pacman.rect.y = HEIGHT - pacman.rect.height
-
-        # Отрисовка
-        screen.fill(BLACK)
-        draw_maze()
-        pacman.draw()
-        pygame.display.flip()
-        clock.tick(30)
-
-    pygame.quit()
-
-if __name__ == "__main__":
-    main()
+        gameLoop();
+    </script>
+</body>
+</html>
